@@ -19,10 +19,6 @@ fi
 # CLONE_DIR=$(mktemp -d)
 CLONE_DIR=$(echo "$DESTINATION_REPO" | rev | cut -d "/" -f1 | rev)
 
-echo "Setting git variables"
-export GITHUB_TOKEN=$API_TOKEN_GITHUB
-
-
 echo "Cloning destination git repository"
 git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY_OWNER/$DESTINATION_REPO.git" "$CLONE_DIR" > /dev/null
 
