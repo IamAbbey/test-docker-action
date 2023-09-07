@@ -20,6 +20,7 @@ fi
 CLONE_DIR=$(echo "$DESTINATION_REPO" | rev | cut -d "/" -f1 | rev)
 
 echo "Cloning destination git repository"
+export GITHUB_TOKEN=$API_TOKEN_GITHUB
 git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY_OWNER/$DESTINATION_REPO.git" "$CLONE_DIR" > /dev/null
 
 cd "$CLONE_DIR"
