@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python:slim-bookworm
 LABEL authors="abiodunsotunde"
 
 RUN wget -q  https://api.github.com/repos/cli/cli/releases/latest \

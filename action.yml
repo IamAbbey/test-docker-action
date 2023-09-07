@@ -13,7 +13,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ github.event.merge_commit_sha }}
-    - ${{ GITHUB_REPOSITORY_OWNER }}
     - "test-dep-ci-v2" # DESTINATION_REPO, can be comma seperated
     - "test-dep-ci-v1"  # DEPENDENCY_NAME
+#    - ${{ github.event.merge_commit_sha }}
+#    - ${{ GITHUB_REPOSITORY_OWNER }}

@@ -8,10 +8,8 @@ poetry --version
 #set -e
 #set -x
 #
-#export MERGE_COMMIT_SHA=$1
-#export GITHUB_REPOSITORY_OWNER=$2
-#export DESTINATION_REPO=$3
-#export DEPENDENCY_NAME=$4
+#export DESTINATION_REPO=$1
+#export DEPENDENCY_NAME=$2
 #export DESTINATION_BASE_BRANCH="master"
 #export API_TOKEN_GITHUB="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"
 #export NEW_BRANCH_NAME="dependency-update-$MERGE_COMMIT_SHA"
