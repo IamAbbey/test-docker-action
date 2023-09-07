@@ -1,4 +1,7 @@
-#!/bin/sh -l
+#!/bin/sh
+
+set -e
+set -x
 
 echo "Hello world"
 
