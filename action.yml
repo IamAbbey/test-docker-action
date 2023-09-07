@@ -15,5 +15,5 @@ runs:
   args:
     - "test-dep-ci-v2" # DESTINATION_REPO, can be comma seperated
     - "test-dep-ci-v1"  # DEPENDENCY_NAME
-    - "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"
+#    - "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"
 #    - ${{ GITHUB_REPOSITORY_OWNER }}
