@@ -15,6 +15,5 @@ runs:
   args:
     - "test-dep-ci-v2" # DESTINATION_REPO, can be comma seperated
     - "test-dep-ci-v1"  # DEPENDENCY_NAME
-    - ${{ GITHUB_SHA }}
 #    - ${{ github.event.merge_commit_sha }}
 #    - ${{ GITHUB_REPOSITORY_OWNER }}
