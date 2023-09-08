@@ -31,7 +31,7 @@ git config user.name "Dependency Update"
 git config commit.gpgsign false
 
 echo "Updating pyproject.toml"
-sed -i '' -e "s/\($DEPENDENCY_NAME.*, rev =\).*\(}\)/\1 \"$MERGE_COMMIT_SHA\" \2/" pyproject.toml > /dev/null
+sed -i -e "s/\($DEPENDENCY_NAME.*, rev =\).*\(}\)/\1 \"$MERGE_COMMIT_SHA\" \2/" pyproject.toml
 
 echo "Running poetry update"
 poetry update > /dev/null
