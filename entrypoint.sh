@@ -54,7 +54,7 @@ if [ "$CHANGED_FILE_COUNT" -eq 2 ]; then
   echo "Adding git commit"
   git commit -a -m "chore(poetry): bot bump dependencies"
   echo "Pushing git commit"
-  git push -f -u origin "$NEW_BRANCH_NAME"
+  git push origin "$NEW_BRANCH_NAME"
   echo "Creating a pull request"
   gh pr create --title "Dependency update for $DEPENDENCY_NAME" \
               --body "Dependency update for $DEPENDENCY_NAME" \
