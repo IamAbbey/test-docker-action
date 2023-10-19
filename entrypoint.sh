@@ -6,10 +6,10 @@ set -x
 DESTINATION_REPO=$1
 DEPENDENCY_NAME=$2
 MERGE_COMMIT_SHA=$GITHUB_SHA
-DESTINATION_BASE_BRANCH="main"
-API_TOKEN_GITHUB=$3
+DESTINATION_BASE_BRANCH=$3
+API_TOKEN_GITHUB=$4
 NEW_BRANCH_NAME="dependency-update-$MERGE_COMMIT_SHA"
-SSH_KEY=$4
+SSH_KEY=$5
 
 if [ -z "$MERGE_COMMIT_SHA" ]
 then
@@ -54,7 +54,7 @@ if [ "$CHANGED_FILE_COUNT" -eq 2 ]; then
   echo "Adding git commit"
   git commit -a -m "chore(poetry): bot bump dependencies"
   echo "Pushing git commit"
-  git push -u origin "$NEW_BRANCH_NAME"
+  git push -f -u origin "$NEW_BRANCH_NAME"
   echo "Creating a pull request"
   gh pr create --title "Dependency update for $DEPENDENCY_NAME" \
               --body "Dependency update for $DEPENDENCY_NAME" \

@@ -8,6 +8,10 @@ inputs:
   dependency_name:
     description: 'Name of the dependency as in the pyproject.toml to be updated'
     required: true
+  destination_base_branch:
+    description: "The branch into which you want your code merged"
+    required: false
+    default: 'main'
   access_token:
     description: "API Github Access Token"
     required: true
@@ -20,5 +24,6 @@ runs:
   args:
     - ${{ inputs.destination_repo }} # DESTINATION_REPO, can be comma seperated
     - ${{ inputs.dependency_name }}  # DEPENDENCY_NAME
+    - ${{ inputs.destination_base_branch }}  # DESTINATION_BASE_BRANCH
     - ${{ inputs.access_token }}  # API_TOKEN_GITHUB
     # - ${{ inputs.ssh_key }}  # SSH_KEY
