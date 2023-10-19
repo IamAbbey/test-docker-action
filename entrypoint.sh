@@ -35,11 +35,12 @@ echo "Updating pyproject.toml"
 sed -i -e "s/\($DEPENDENCY_NAME.*, rev =\).*\(}\)/\1 \"$MERGE_COMMIT_SHA\" \2/" pyproject.toml
 
 echo "Running poetry update"
-if [ ! -z "$SSH_KEY" ]
-then
-    eval "$(ssh-agent -s)"
-    ssh-add - <<< "${SSH_KEY}"
-fi
+# if [ -z "$SSH_KEY" ]; then
+#   echo "No ssh key supplied";
+# else
+#     eval "$(ssh-agent -s)"
+#     ssh-add - <<< "${SSH_KEY}"
+# fi
 poetry update > /dev/null
 
 echo "Logging changes"
