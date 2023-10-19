@@ -7,8 +7,9 @@ DESTINATION_REPO=$1
 DEPENDENCY_NAME=$2
 MERGE_COMMIT_SHA=$GITHUB_SHA
 DESTINATION_BASE_BRANCH="master"
-API_TOKEN_GITHUB=$ACCESS_TOKEN
+API_TOKEN_GITHUB=$3
 NEW_BRANCH_NAME="dependency-update-$MERGE_COMMIT_SHA"
+SSH_KEY=$4
 
 if [ -z "$MERGE_COMMIT_SHA" ]
 then
@@ -34,6 +35,10 @@ echo "Updating pyproject.toml"
 sed -i -e "s/\($DEPENDENCY_NAME.*, rev =\).*\(}\)/\1 \"$MERGE_COMMIT_SHA\" \2/" pyproject.toml
 
 echo "Running poetry update"
+if [ ! -z "${{ SSH_KEY }}" ]; then
+    eval "$(ssh-agent -s)"
+    ssh-add - <<< "${{ SSH_KEY }}"
+fi
 poetry update > /dev/null
 
 echo "Logging changes"

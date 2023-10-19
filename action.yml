@@ -1,17 +1,24 @@
 # action.yml
 name: 'Dependency Update Bot'
 description: 'Update dependency'
-#inputs:
-#  who-to-greet:  # id of input
-#    description: 'Who to greet'
-#    required: true
-#    default: 'World'
-#outputs:
-#  time: # id of output
-#    description: 'The time we greeted you'
+inputs:
+  destination_repo:
+    description: 'The repositories to be updated, can be comma seperated'
+    required: true
+  dependency_name:
+    description: 'Name of the dependency as in the pyproject.toml to be updated'
+    required: true
+  access_token:
+    description: "API Github Access Token"
+    required: true
+  ssh_key:
+    description: "SSH key to use to clone private repositories"
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - "test-dep-ci-v2" # DESTINATION_REPO, can be comma seperated
-    - "test-dep-ci-v1"  # DEPENDENCY_NAME
+    - ${{ inputs.destination_repo }} # DESTINATION_REPO, can be comma seperated
+    - ${{ inputs.dependency_name }}  # DEPENDENCY_NAME
+    - ${{ inputs.access_token }}  # API_TOKEN_GITHUB
+    # - ${{ inputs.ssh_key }}  # SSH_KEY
