@@ -25,7 +25,9 @@ export GITHUB_TOKEN=$API_TOKEN_GITHUB
 git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY_OWNER/$DESTINATION_REPO.git" "$CLONE_DIR" > /dev/null
 
 cd "$CLONE_DIR"
-git checkout -b "$NEW_BRANCH_NAME"
+
+git fetch origin "$NEW_BRANCH_NAME"
+git checkout -B "$NEW_BRANCH_NAME"
 
 git config user.email "dependency-update@bot.com"
 git config user.name "Dependency Update"
