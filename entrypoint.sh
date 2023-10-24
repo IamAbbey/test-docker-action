@@ -26,8 +26,8 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY_OWNER/$DESTIN
 
 cd "$CLONE_DIR"
 
-BRANCH_EXIST=$(git fetch origin "$NEW_BRANCH_NAME" || echo 404)
-if [ "$BRANCH_EXIST" -eq 404 ]; then
+BRANCH_EXIST=$(git fetch origin "$NEW_BRANCH_NAME" || echo 1)
+if [ "$BRANCH_EXIST" -eq 1 ]; then
   git checkout -b "$NEW_BRANCH_NAME"
 else
   git checkout "$NEW_BRANCH_NAME"
@@ -54,18 +54,22 @@ git status -s -uno
 
 CHANGED_FILE_COUNT=$(git status -s -uno | wc -l | tr -d ' ')
 
-if [ "$CHANGED_FILE_COUNT" -eq 2 ]; then
-  echo "Two files changes detected";
-
-  echo "Adding git commit"
-  git commit -a -m "chore(poetry): bot bump dependencies"
-  echo "Pushing git commit"
-  git push origin "$NEW_BRANCH_NAME"
-  echo "Creating a pull request"
-  gh pr create --title "Dependency update for $DEPENDENCY_NAME" \
-              --body "Dependency update for $DEPENDENCY_NAME" \
-              --base $DESTINATION_BASE_BRANCH \
-
+if [ "$CHANGED_FILE_COUNT" -eq 0 ]; then
+  echo "No changes detected";
 else
-  echo "Two file changes expected, something seems wrong"
+  if [ "$CHANGED_FILE_COUNT" -eq 2 ]; then
+    echo "Two files changes detected";
+
+    echo "Adding git commit"
+    git commit -a -m "chore(poetry): bot bump dependencies"
+    echo "Pushing git commit"
+    git push origin "$NEW_BRANCH_NAME"
+    echo "Creating a pull request"
+    gh pr create --title "Dependency update for $DEPENDENCY_NAME" \
+                --body "Dependency update for $DEPENDENCY_NAME" \
+                --base $DESTINATION_BASE_BRANCH \
+
+  else
+    echo "Two file changes expected, something seems wrong"
+  fi
 fi
