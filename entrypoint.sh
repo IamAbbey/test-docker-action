@@ -26,8 +26,12 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY_OWNER/$DESTIN
 
 cd "$CLONE_DIR"
 
-git fetch origin "$NEW_BRANCH_NAME"
-git checkout "$NEW_BRANCH_NAME"
+BRANCH_EXIST = $(git fetch origin "$NEW_BRANCH_NAME" || echo 404)
+if [ "$BRANCH_EXIST" -eq 404 ]; then
+  git checkout -b "$NEW_BRANCH_NAME"
+else
+  git checkout "$NEW_BRANCH_NAME"
+fi
 
 git config user.email "dependency-update@bot.com"
 git config user.name "Dependency Update"
