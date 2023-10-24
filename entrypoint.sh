@@ -26,7 +26,7 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY_OWNER/$DESTIN
 
 cd "$CLONE_DIR"
 
-BRANCH_EXIST = $(git fetch origin "$NEW_BRANCH_NAME" || echo 404)
+BRANCH_EXIST=$(git fetch origin "$NEW_BRANCH_NAME" || echo 404)
 if [ "$BRANCH_EXIST" -eq 404 ]; then
   git checkout -b "$NEW_BRANCH_NAME"
 else
